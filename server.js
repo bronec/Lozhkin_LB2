@@ -21,10 +21,6 @@ app.get('/login', (req, res) => {
   res.send('Lozhkin');
 });
 
-app.get('/login/ru', function (req, res) {
-  res.sendFile(path.join(__dirname, 'login.html'));
-});
-
 app.get('/login/by', function (req, res) {
   fs.readFile('login.html', (err, data) => {
       if (err) {
@@ -38,6 +34,10 @@ app.get('/login/by', function (req, res) {
       res.writeHead(200);
       res.end(data);
   });
+});
+
+app.get('/login/ru', function (req, res) {
+  res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 app.get('/fetch/', (req, res) => {
