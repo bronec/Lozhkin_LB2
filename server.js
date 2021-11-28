@@ -33,7 +33,7 @@ app.get('/login/by', function (req, res) {
         return;
       }
   
-      data = data.toString().replace("<title></title>", "<title>Login by Lozhkin</title>");
+      data = data.toString().replace("<title></title>", "<title>Login by</title>");
       res.writeHead(200);
       res.end(data);
   });
