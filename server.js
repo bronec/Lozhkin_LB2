@@ -6,18 +6,37 @@ const PORT = process.env.PORT || 8010;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('X-Author', 'Lozhkin S.A.');
   next();
 });
 
 const task = (x) => {
   return new Promise((resolve, reject) => {
-    if (x < 18) resolve('yes');
+    if (x < 13) resolve('yes');
     else reject('no');
   });
 };
 
 app.get('/login', (req, res) => {
   res.send('Lozhkin');
+});
+
+app.get('/login/ru', function (req, res) {
+  res.sendFile(path.join(__dirname, 'login.html'));
+});
+
+app.get('/login/by', function (req, res) {
+  fs.readFile('login.html', (err, data) => {
+      if (err) {
+        res.writeHead(500);
+        res.end(err);
+        return;
+      }
+  
+      data = data.toString().replace("<title></title>", "<title>Login by Lozhkin</title>");
+      res.writeHead(200);
+      res.end(data);
+  });
 });
 
 app.get('/promise', (req, res) => {
@@ -38,6 +57,10 @@ app.get('/', (req, res) => {
   res.set({ 'Content-Type': 'text/html; charset=UTF-8' });
   res.send('<h1>Lozhkin</h1>')
 })
+
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'error.html'));
+});
 
 app.get('/fetch', (req, res) => {
   res.set({ 'Content-Type': 'text/html; charset=UTF-8' });
