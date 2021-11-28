@@ -39,6 +39,11 @@ app.get('/login/by', function (req, res) {
   });
 });
 
+app.get('/fetch/', (req, res) => {
+  res.set({ 'Content-Type': 'text/html; charset=UTF-8' });
+  res.sendFile(path.resolve(__dirname, 'index.html'));
+});
+
 app.get('/promise', (req, res) => {
   res.send(task.toString());
 });
@@ -60,11 +65,6 @@ app.get('/', (req, res) => {
 
 app.use(function(req, res) {
   res.sendFile(path.join(__dirname, 'error.html'));
-});
-
-app.get('/fetch', (req, res) => {
-  res.set({ 'Content-Type': 'text/html; charset=UTF-8' });
-  res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}...`));
