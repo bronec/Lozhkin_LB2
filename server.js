@@ -6,7 +6,6 @@ var fs = require('fs');
 const PORT = process.env.PORT || 8010;
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, 'error.html'));
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('X-Author', 'Lozhkin S.A.');
   next();
@@ -60,6 +59,10 @@ app.get('/promise/:val', async (req, res) =>{
     res.send(err)
   }
 })
+
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'error.html'));
+});
 
 app.get('/', (req, res) => {
   res.set({ 'Content-Type': 'text/html; charset=UTF-8' });
