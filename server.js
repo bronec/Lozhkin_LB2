@@ -18,11 +18,11 @@ const task = (x) => {
   });
 };
 
-app.get('/login', (req, res) => {
+app.get('/login/', (req, res) => {
   res.send('Lozhkin');
 });
 
-app.get('/login/by', function (req, res) {
+app.get('/login/code2', function (req, res) {
   fs.readFile('login.html', (err, data) => {
       if (err) {
         res.writeHead(500);
@@ -37,8 +37,25 @@ app.get('/login/by', function (req, res) {
   });
 });
 
-app.get('/login/ru', function (req, res) {
+app.get('/login/code1', function (req, res) {
   res.sendFile(path.join(__dirname, 'login.html'));
+});
+
+app.get('/login/:id', function (req, res) {
+  if(req.params.id == 1){
+      res.writeHeader(200, 
+          { 
+              'Content-Type': 'application/json', 
+              'Access-Control-Allow-Origin': '*', 
+              'X-Author': 'Lozhkin'
+          });
+          res.write(JSON.stringify(loginContent));
+          res.end();
+          return;
+  }
+  if(req.params.id == 2){
+      res.setHeader("Content-Type", "application/json").send(JSON.stringify(loginContent));
+  }
 });
 
 app.get('/fetch/', (req, res) => {
@@ -65,8 +82,7 @@ app.use(function(req, res) {
 });
 
 app.get('/', (req, res) => {
-  res.set({ 'Content-Type': 'text/html; charset=UTF-8' });
-  res.send('<h1>Lozhkin</h1>')
+  res.sendFile(path.join(__dirname, 'errorsecond.html'));
 })
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}...`));
