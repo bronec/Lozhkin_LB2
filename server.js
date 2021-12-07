@@ -77,12 +77,12 @@ app.get('/promise/:val', async (req, res) =>{
   }
 })
 
-app.use(function(req, res) {
-  res.sendFile(path.join(__dirname, 'error.html'));
-});
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'errorsecond.html'));
 })
+
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'error.html'));
+});
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}...`));
