@@ -49,12 +49,12 @@ app.get('/login/:id', function (req, res) {
               'Access-Control-Allow-Origin': '*', 
               'X-Author': 'Lozhkin'
           });
-          res.write(JSON.stringify(loginContent));
+          res.write(JSON.stringify("Lozhkin"));
           res.end();
           return;
   }
   if(req.params.id == 2){
-      res.setHeader("Content-Type", "application/json").send(JSON.stringify(loginContent));
+      res.setHeader("Content-Type", "application/json").send(JSON.stringify("Lozhkin"));
   }
 });
 
